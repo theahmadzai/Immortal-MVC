@@ -30,6 +30,7 @@ if ($debug) {
 date_default_timezone_set('UTC');
 
 require '../app/bootstrap/Autoloader.php';
+echo 'abc';
 
 Autoloader::map([
     __DIR__ . '/../app/helpers',
