@@ -29,9 +29,9 @@ if ($debug) {
 
 date_default_timezone_set('UTC');
 
-require '../app/bootstrap/Loader.php';
+require '../app/bootstrap/Autoloader.php';
 
-$loader = new Loader([
+Autoloader::map([
     __DIR__ . '/../app/helpers',
     __DIR__ . '/../app/core',
 ]);
