@@ -2,21 +2,14 @@
 
 abstract class Kernel
 {
-    private $router;
-    private $response;
-
     abstract protected function config();
+
+    private $router;
 
     public function __construct()
     {
-        $this->initialize();
+        $this->router = new Router();
         $this->runApp($this->router->getParams());
-    }
-
-    private function initialize()
-    {
-        $this->router   = new Router();
-        $this->response = new Response();
     }
 
     private function runApp($params = [])
@@ -38,8 +31,7 @@ abstract class Kernel
 
                 if ($method !== false) {
 
-                    $this->response->setContent($method);
-                    $this->response->send();
+                    Response::render($method[0], $method[1]);
 
                 } else {
                     throw new HttpException($method . ' ==> Method is not found.');
