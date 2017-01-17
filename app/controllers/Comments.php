@@ -2,14 +2,8 @@
 
 class Comments
 {
-    public function index($params = [])
+    public function index($name, $fname)
     {
-        extract($params);
-
-        if (!empty($params)) {
-            pr($params);
-        } else {
-            echo 'No params';
-        }
+        return View::make('user', compact('name', 'fname'));
     }
 }

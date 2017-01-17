@@ -23,10 +23,12 @@ class Response
         }
     }
 
-    public static function render($path, $data = false, $error = false)
+    public static function render($path, $data)
     {
         self::sendHeaders();
 
-        require __DIR__ . '/../views/' . $path . '.php';
+        if (!empty($path)) {
+            require __DIR__ . '/../views/' . $path . '.php';
+        }
     }
 }

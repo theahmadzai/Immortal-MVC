@@ -7,8 +7,8 @@ class User extends Controller
         return View::make('user', 'welcome');
     }
 
-    public function name($params = [])
+    public function name($name)
     {
-        return View::make('user', $params);
+        return View::make('user', $name);
     }
 }

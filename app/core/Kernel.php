@@ -31,7 +31,10 @@ abstract class Kernel
 
                 if ($method !== false) {
 
-                    Response::render($method[0], $method[1]);
+                    if (is_array($method)) {
+
+                        Response::render($method[0], $method[1]);
+                    }
 
                 } else {
                     throw new HttpException($method . ' ==> Method is not found.');
@@ -68,7 +71,7 @@ abstract class Kernel
     private function runMethod($controller, $method, $params)
     {
         if (method_exists($controller, $method)) {
-            return $controller->$method($params);
+            return call_user_func_array([$controller, $method], $params);
         }
         return false;
     }

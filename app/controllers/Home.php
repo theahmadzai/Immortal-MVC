@@ -4,6 +4,6 @@ class Home
 {
     public function index()
     {
-        echo 'Index';
+        return View::make('user');
     }
 }

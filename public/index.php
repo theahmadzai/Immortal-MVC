@@ -19,23 +19,25 @@ if (version_compare(PHP_VERSION, '5.4', '<') === true) {
     die('Please update your PHP version, requires PHP v5.4 or Above! \n');
 }
 
-$debug = true;
-if ($debug) {
+defined('DEVELOPMENT_ENVIRONMENT') or define('DEVELOPMENT_ENVIRONMENT', true);
+
+if (DEVELOPMENT_ENVIRONMENT === true) {
+    error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    error_reporting(-1);
 } else {
+    error_reporting(E_ALL);
     ini_set('display_errors', 0);
 }
 
 date_default_timezone_set('UTC');
 
-require '../app/bootstrap/Autoloader.php';
+require '/../app/bootstrap/Autoloader.php';
 
 Autoloader::map([
     __DIR__ . '/../app/helpers',
     __DIR__ . '/../app/core',
 ]);
 
-require '../app/bootstrap/App.php';
+require '/../app/bootstrap/App.php';
 
 $App = new App();
