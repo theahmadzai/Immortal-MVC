@@ -16,7 +16,7 @@ function pr($arr)
 /**----------------------------------------------------------------------------------------*/
 
 if (version_compare(PHP_VERSION, '5.4', '<') === true) {
-    die('Please update your PHP version, requires PHP v5.4 or Above! \n');
+    die('Please update your PHP version, Requires PHP v5.4 or Above! \n');
 }
 
 defined('DEVELOPMENT_ENVIRONMENT') or define('DEVELOPMENT_ENVIRONMENT', true);
