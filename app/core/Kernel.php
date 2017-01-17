@@ -15,32 +15,31 @@ abstract class Kernel
     private function runApp($params = [])
     {
         try {
-            if ($params === false) {
-                throw new HttpException(Request::get('url') . ' ==> URL not found.');
-            }
+            if ($params !== false) {
 
-            $controller = $params['controller'];
-            $method     = $params['method'];
-            $params     = $params['params'];
+                extract($params);
 
-            $controller = $this->runController($controller);
+                $controller = $this->runController($controller);
 
-            if ($controller !== false) {
+                if ($controller !== false) {
 
-                $method = $this->runMethod($controller, $method, $params);
+                    $method = $this->runMethod($controller, $method, $params);
 
-                if ($method !== false) {
+                    if ($method !== false) {
 
-                    if (is_array($method)) {
+                        if (is_array($method)) {
 
-                        Response::render($method[0], $method[1]);
+                            Response::render($method[0], $method[1]);
+                        }
+
+                    } else {
+                        throw new HttpException($method . ' ==> Method not found.');
                     }
-
                 } else {
-                    throw new HttpException($method . ' ==> Method is not found.');
+                    throw new HttpException($controller . ' ==> Controller not found.');
                 }
             } else {
-                throw new HttpException($controller . ' ==> Controller is not found.');
+                throw new HttpException(Request::get('url') . ' ==> URL not found.');
             }
         } catch (HttpException $e) {
             echo ($e);
