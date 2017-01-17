@@ -45,11 +45,18 @@ class Router
             }
             $pattern = implode('/', $url_parts);
 
-            $route = explode('@', $route);
+            if (is_callable(($route))) {
+                $params['controller'] = false;
+                $params['method']     = $route;
 
-            $params['controller'] = $route[0];
-            $params['method']     = $route[1];
-            $params['params']     = $url_params;
+            } else {
+                $route = explode('@', $route);
+
+                $params['controller'] = $route[0];
+                $params['method']     = $route[1];
+            }
+
+            $params['params'] = $url_params;
 
             $routes[$pattern] = $params;
         }

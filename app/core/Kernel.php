@@ -2,8 +2,6 @@
 
 abstract class Kernel
 {
-    private $router;
-
     public function __construct()
     {
         $this->runApp(Router::getInstance()->getParams());
@@ -15,6 +13,25 @@ abstract class Kernel
             if ($params !== false) {
 
                 extract($params);
+
+                if ($controller === false) {
+
+                    $method = call_user_func_array($method, $params);
+
+                    if (is_array($method)) {
+
+                        if (!empty($method) && array_key_exists('view', $method) && $method['view'] === true) {
+
+                            Response::render($method[0], $method[1]);
+
+                        } else {
+                            echo '<pre>', print_r($method, true), '</pre>';
+                        }
+                    } else {
+                        echo $method;
+                    }
+                    exit;
+                }
 
                 $controller = $this->runController($controller);
 
@@ -43,7 +60,7 @@ abstract class Kernel
         }
     }
 
-    private function runController($controller)
+    public function runController($controller)
     {
         if (!class_exists($controller)) {
 
@@ -64,7 +81,7 @@ abstract class Kernel
         return false;
     }
 
-    private function runMethod($controller, $method, $params)
+    public function runMethod($controller, $method, $params)
     {
         if (method_exists($controller, $method)) {
             return call_user_func_array([$controller, $method], $params);
