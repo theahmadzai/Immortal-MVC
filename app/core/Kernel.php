@@ -60,7 +60,7 @@ abstract class Kernel
         }
     }
 
-    public function runController($controller)
+    private function runController($controller)
     {
         if (!class_exists($controller)) {
 
@@ -81,7 +81,7 @@ abstract class Kernel
         return false;
     }
 
-    public function runMethod($controller, $method, $params)
+    private function runMethod($controller, $method, $params)
     {
         if (method_exists($controller, $method)) {
             return call_user_func_array([$controller, $method], $params);
