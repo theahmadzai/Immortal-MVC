@@ -2,14 +2,23 @@
 
 class Router
 {
+    private static $_instance = null;
+
     private $routes = [];
     private $params = [];
 
     public function __construct()
     {
-        require '/../bootstrap/Routes.php';
         $this->routes = $this->compile(Route::get());
         $this->params = $this->resolve(Request::get('url'));
+    }
+
+    public static function getInstance()
+    {
+        if (!isset(self::$_instance)) {
+            self::$_instance = new Router();
+        }
+        return self::$_instance;
     }
 
     public function getParams()

@@ -39,5 +39,6 @@ Autoloader::map([
 ]);
 
 require '/../app/bootstrap/App.php';
+require '/../app/bootstrap/Routes.php';
 
 $App = new App();

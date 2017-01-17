@@ -2,14 +2,11 @@
 
 abstract class Kernel
 {
-    abstract protected function config();
-
     private $router;
 
     public function __construct()
     {
-        $this->router = new Router();
-        $this->runApp($this->router->getParams());
+        $this->runApp(Router::getInstance()->getParams());
     }
 
     private function runApp($params = [])
