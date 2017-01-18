@@ -35,8 +35,8 @@ require '/../app/bootstrap/Autoloader.php';
 require '/../app/bootstrap/routes.php';
 
 Autoloader::map([
-    __DIR__ . '/../app/helpers',
     __DIR__ . '/../app/core',
+    __DIR__ . '/../app/helpers',
 ]);
 
 $App = new App();
