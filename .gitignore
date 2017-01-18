@@ -1,6 +1,9 @@
 #System
 .DS_Store
 
+#Project
+app/views
+
 #Sass
 .sass-cache/
 *.css.map
