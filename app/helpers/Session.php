@@ -14,10 +14,13 @@ class Session
 
     public static function delete($name)
     {
-        if (!empty($name)) {
-            if (!self::get($name) === false) {
+        if (!empty($name))
+        {
+            if (!self::get($name) === false)
+            {
                 unset($_SESSION[$name]);
             }
+
             return false;
         }
         session_destroy();

@@ -6,7 +6,8 @@ class Autoloader
 
     public static function map(array $dirs = [])
     {
-        foreach ($dirs as $dir) {
+        foreach ($dirs as $dir)
+        {
             self::$dirs[] = realpath($dir);
         }
         self::load();
@@ -14,10 +15,13 @@ class Autoloader
 
     private static function load()
     {
-        spl_autoload_register(function ($class) {
-            foreach (self::$dirs as $dir) {
+        spl_autoload_register(function ($class)
+        {
+            foreach (self::$dirs as $dir)
+            {
                 $file = $dir . '/' . $class . '.php';
-                if (is_readable($file)) {
+                if (is_readable($file))
+                {
                     require_once $file;
                 }
             }

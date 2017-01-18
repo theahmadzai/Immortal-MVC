@@ -6,7 +6,8 @@ class Route
 
     public static function get($key = null)
     {
-        if (!$key) {
+        if (!$key)
+        {
             return self::$routes;
         }
 

@@ -16,8 +16,10 @@ class Response
 
     public static function sendHeaders()
     {
-        if (!headers_sent()) {
-            foreach (self::$headers as $header) {
+        if (!headers_sent())
+        {
+            foreach (self::$headers as $header)
+            {
                 header($header, true);
             }
         }
@@ -27,7 +29,8 @@ class Response
     {
         self::sendHeaders();
 
-        if (!empty($path)) {
+        if (!empty($path))
+        {
             require __DIR__ . '/../views/' . $path . '.php';
         }
     }

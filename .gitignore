@@ -1,13 +1,15 @@
 #System
 .DS_Store
+Thumbs.db
+desktop.ini
 
 #Project
-app/views
+/app/views/
 
 #Sass
 .sass-cache/
 *.css.map
 
 #Composer
-vendor
+/vendor/
 composer.lock

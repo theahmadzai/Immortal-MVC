@@ -10,24 +10,27 @@ abstract class Kernel
     private function runApp($params = [])
     {
         try {
-            if ($params !== false) {
-
+            if ($params !== false)
+            {
                 extract($params);
 
-                if ($controller === false) {
-
+                if ($controller === false)
+                {
                     $method = call_user_func_array($method, $params);
 
-                    if (is_array($method)) {
-
-                        if (!empty($method) && array_key_exists('view', $method) && $method['view'] === true) {
-
+                    if (is_array($method))
+                    {
+                        if (!empty($method) && array_key_exists('view', $method) && $method['view'] === true)
+                        {
                             Response::render($method[0], $method[1]);
-
-                        } else {
+                        }
+                        else
+                        {
                             echo '<pre>', print_r($method, true), '</pre>';
                         }
-                    } else {
+                    }
+                    else
+                    {
                         echo $method;
                     }
                     exit;
@@ -35,57 +38,72 @@ abstract class Kernel
 
                 $controller = $this->runController($controller);
 
-                if ($controller !== false) {
-
+                if ($controller !== false)
+                {
                     $method = $this->runMethod($controller, $method, $params);
 
-                    if ($method !== false) {
-
-                        if (is_array($method)) {
-
+                    if ($method !== false)
+                    {
+                        if (is_array($method))
+                        {
                             Response::render($method[0], $method[1]);
                         }
-
-                    } else {
+                    }
+                    else
+                    {
                         throw new HttpException($method . ' ==> Method not found.');
                     }
-                } else {
+                }
+                else
+                {
                     throw new HttpException($controller . ' ==> Controller not found.');
                 }
-            } else {
+            }
+            else
+            {
                 throw new HttpException(Request::get('url') . ' ==> URL not found.');
             }
-        } catch (HttpException $e) {
+        }
+        catch (HttpException $e)
+        {
             echo ($e);
         }
     }
 
     private function runController($controller)
     {
-        if (!class_exists($controller)) {
+        if (!class_exists($controller))
+        {
 
             $file = __DIR__ . '/../controllers/' . $controller . '.php';
 
-            if (file_exists($file) && is_readable($file)) {
+            if (file_exists($file) && is_readable($file))
+            {
 
                 require_once $file;
 
-                if (class_exists($controller)) {
+                if (class_exists($controller))
+                {
 
                     return new $controller($this);
                 }
+
                 return false;
             }
+
             return false;
         }
+
         return false;
     }
 
     private function runMethod($controller, $method, $params)
     {
-        if (method_exists($controller, $method)) {
+        if (method_exists($controller, $method))
+        {
             return call_user_func_array([$controller, $method], $params);
         }
+
         return false;
     }
 }

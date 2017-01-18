@@ -15,9 +15,11 @@ class Router
 
     public static function getInstance()
     {
-        if (!isset(self::$_instance)) {
+        if (!isset(self::$_instance))
+        {
             self::$_instance = new Router();
         }
+
         return self::$_instance;
     }
 
@@ -30,12 +32,15 @@ class Router
     {
         $routes = [];
 
-        foreach ($definitions as $pattern => $route) {
+        foreach ($definitions as $pattern => $route)
+        {
             $url_parts  = explode('/', trim($pattern, '/'));
             $url_params = [];
 
-            foreach ($url_parts as $i => $part) {
-                if (strpos($part, ':') === 0) {
+            foreach ($url_parts as $i => $part)
+            {
+                if (strpos($part, ':') === 0)
+                {
                     $name              = trim(substr($part, 1), '?');
                     $type              = (strpos(trim($part, ':'), '?') === 0) ? true : false;
                     $reset_part        = (strpos(trim($part, ':'), '?') === 0) ? '?(?P<' . $name . '>[^/]+)?' : '(?P<' . $name . '>[^/]+)';
@@ -45,11 +50,14 @@ class Router
             }
             $pattern = implode('/', $url_parts);
 
-            if (is_callable(($route))) {
+            if (is_callable(($route)))
+            {
                 $params['controller'] = false;
                 $params['method']     = $route;
 
-            } else {
+            }
+            else
+            {
                 $route = explode('@', $route);
 
                 $params['controller'] = $route[0];
@@ -60,6 +68,7 @@ class Router
 
             $routes[$pattern] = $params;
         }
+
         return $routes;
     }
 
@@ -67,16 +76,22 @@ class Router
     {
         $url = filter_var(trim($url, '/'), FILTER_SANITIZE_URL);
 
-        foreach ($this->routes as $pattern => $params) {
-            if (preg_match('~^' . $pattern . '$~', $url, $matches)) {
-                foreach ($matches as $key => $value) {
-                    if (array_key_exists($key, $params['params'])) {
+        foreach ($this->routes as $pattern => $params)
+        {
+            if (preg_match('~^' . $pattern . '$~', $url, $matches))
+            {
+                foreach ($matches as $key => $value)
+                {
+                    if (array_key_exists($key, $params['params']))
+                    {
                         $params['params'][$key] = $value;
                     }
                 }
+
                 return $params;
             }
         }
+
         return false;
     }
 }
