@@ -34,11 +34,10 @@ date_default_timezone_set('UTC');
 require '/../app/bootstrap/Autoloader.php';
 
 Autoloader::map([
-    __DIR__ . '/../app/helpers',
     __DIR__ . '/../app/core',
+    __DIR__ . '/../app/helpers',
 ]);
 
-require '/../app/bootstrap/App.php';
-require '/../app/bootstrap/Routes.php';
+require '/../app/bootstrap/routes.php';
 
 $App = new App();
