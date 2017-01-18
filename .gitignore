@@ -1,4 +1,10 @@
+#System
 .DS_Store
+
+#Sass
 .sass-cache/
 *.css.map
+
+#Composer
 vendor
+composer.lock
