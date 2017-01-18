@@ -32,13 +32,11 @@ if (DEVELOPMENT_ENVIRONMENT === true) {
 date_default_timezone_set('UTC');
 
 require '/../app/bootstrap/Autoloader.php';
+require '/../app/bootstrap/routes.php';
 
 Autoloader::map([
     __DIR__ . '/../app/helpers',
     __DIR__ . '/../app/core',
 ]);
-
-require '/../app/bootstrap/App.php';
-require '/../app/bootstrap/Routes.php';
 
 $App = new App();
