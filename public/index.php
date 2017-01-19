@@ -12,6 +12,9 @@ if (version_compare(PHP_VERSION, '5.4', '<') === true)
 }
 
 define('DEV_ENV', true);
+define('APP', __DIR__ . '/../app/');
+
+date_default_timezone_set('UTC');
 
 if (DEV_ENV === true)
 {
@@ -32,15 +35,11 @@ else
     ini_set('display_errors', 0);
 }
 
-date_default_timezone_set('UTC');
-
-require '/../app/bootstrap/Autoloader.php';
+require '/../app/Autoloader.php';
 
 Autoloader::map([
-    __DIR__ . '/../app/core',
-    __DIR__ . '/../app/helpers',
+    'files'   => ['config', 'http'],
+    'classes' => ['core', 'helpers', 'exceptions'],
 ]);
-
-require '/../app/bootstrap/routes.php';
 
 $App = new App();
