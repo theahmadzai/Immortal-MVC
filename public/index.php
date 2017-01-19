@@ -39,7 +39,7 @@ require '/../app/Autoloader.php';
 
 Autoloader::map([
     'files'   => ['config', 'http'],
-    'classes' => ['core', 'helpers', 'exceptions'],
+    'classes' => ['core', 'helpers', 'exceptions', 'models'],
 ]);
 
 $App = new App();

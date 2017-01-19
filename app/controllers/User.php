@@ -1,4 +1,5 @@
 <?php
+use Model\User as UM;
 
 class User extends Controller
 {
@@ -9,6 +10,9 @@ class User extends Controller
 
     public function name($name)
     {
-        return View::make('index', $name);
+        $sum = new UM\User();
+        $sum = $sum->get();
+
+        return View::make('index', $sum);
     }
 }
