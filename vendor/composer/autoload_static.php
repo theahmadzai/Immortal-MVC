@@ -21,7 +21,24 @@ class ComposerStaticInit269f11d3e0f8d396ac6f115f01ece6ca
     );
 
     public static $classMap = array (
-        'App\\Core\\App' => __DIR__ . '/../..' . '/app/core/App.php',
+        'App\\Exceptions\\HttpException' => __DIR__ . '/../..' . '/app/Exceptions/HttpException.php',
+        'App\\Http\\Controllers\\Comments' => __DIR__ . '/../..' . '/app/Http/Controllers/Comments.php',
+        'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\Home' => __DIR__ . '/../..' . '/app/Http/Controllers/Home.php',
+        'App\\Http\\Controllers\\User' => __DIR__ . '/../..' . '/app/Http/Controllers/User.php',
+        'App\\Http\\Controllers\\Users' => __DIR__ . '/../..' . '/app/Http/Controllers/Users.php',
+        'App\\Http\\Models\\User' => __DIR__ . '/../..' . '/app/Http/Models/User.php',
+        'App\\Providers\\App' => __DIR__ . '/../..' . '/app/Providers/App.php',
+        'App\\Providers\\Autoloader' => __DIR__ . '/../..' . '/app/Providers/Autoloader.php',
+        'App\\Providers\\Config' => __DIR__ . '/../..' . '/app/Providers/Config.php',
+        'App\\Providers\\Controller' => __DIR__ . '/../..' . '/app/Providers/Controller.php',
+        'App\\Providers\\Cookie' => __DIR__ . '/../..' . '/app/Providers/Cookie.php',
+        'App\\Providers\\Request' => __DIR__ . '/../..' . '/app/Providers/Request.php',
+        'App\\Providers\\Response' => __DIR__ . '/../..' . '/app/Providers/Response.php',
+        'App\\Providers\\Route' => __DIR__ . '/../..' . '/app/Providers/Route.php',
+        'App\\Providers\\Router' => __DIR__ . '/../..' . '/app/Providers/Router.php',
+        'App\\Providers\\Session' => __DIR__ . '/../..' . '/app/Providers/Session.php',
+        'App\\Providers\\View' => __DIR__ . '/../..' . '/app/Providers/View.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
