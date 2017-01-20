@@ -1,4 +1,6 @@
 <?php
+namespace App\Providers;
+
 class Cookie
 {
     public static function get($name)

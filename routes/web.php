@@ -1,4 +1,6 @@
 <?php
+use App\Providers\Route;
+use App\Providers\View;
 
 Route::set('/', 'Home@index');
 

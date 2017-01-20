@@ -1,6 +1,9 @@
 <?php
+namespace App\Http\Controllers;
 
-class Comments
+use App\Providers\View;
+
+class Comments extends Controller
 {
     public function index($name, $fname)
     {

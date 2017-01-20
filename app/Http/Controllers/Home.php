@@ -1,6 +1,9 @@
 <?php
+namespace App\Http\Controllers;
 
-class Home
+use App\Providers\View;
+
+class Home extends Controller
 {
     public function index()
     {

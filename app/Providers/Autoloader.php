@@ -1,4 +1,5 @@
 <?php
+namespace App\Providers;
 
 class Autoloader
 {
@@ -26,7 +27,7 @@ class Autoloader
     {
         foreach (self::$files as $dir)
         {
-            $files = glob(APP . $dir . '/*.php');
+            $files = glob(APP_ROOT . $dir . '/*.php');
 
             foreach ($files as $file)
             {
@@ -41,7 +42,7 @@ class Autoloader
         {
             foreach (self::$classes as $dir)
             {
-                self::loadFile(APP . $dir . '/' . $class . '.php');
+                self::loadFile(APP_ROOT . $dir . '/' . $class . '.php');
             }
         });
     }

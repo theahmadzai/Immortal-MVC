@@ -1,4 +1,7 @@
 <?php
+namespace App\Providers;
+
+use App\Exceptions\HttpException;
 
 class App
 {
@@ -14,7 +17,32 @@ class App
             {
                 extract($params);
 
-                if ($controller === false)
+                if ($controller !== false)
+                {
+                    $controller = $this->runController($controller);
+
+                    if ($controller !== false)
+                    {
+                        $method = $this->runMethod($controller, $method, $params);
+
+                        if ($method !== false)
+                        {
+                            if (is_array($method))
+                            {
+                                Response::render($method[0], $method[1]);
+                            }
+                        }
+                        else
+                        {
+                            throw new HttpException($method . ' ==> Method not found.');
+                        }
+                    }
+                    else
+                    {
+                        throw new HttpException($controller . ' ==> Controller not found.');
+                    }
+                }
+                else
                 {
                     $method = call_user_func_array($method, $params);
 
@@ -35,29 +63,6 @@ class App
                     }
                     exit;
                 }
-
-                $controller = $this->runController($controller);
-
-                if ($controller !== false)
-                {
-                    $method = $this->runMethod($controller, $method, $params);
-
-                    if ($method !== false)
-                    {
-                        if (is_array($method))
-                        {
-                            Response::render($method[0], $method[1]);
-                        }
-                    }
-                    else
-                    {
-                        throw new HttpException($method . ' ==> Method not found.');
-                    }
-                }
-                else
-                {
-                    throw new HttpException($controller . ' ==> Controller not found.');
-                }
             }
             else
             {
@@ -74,24 +79,9 @@ class App
     {
         if (!class_exists($controller))
         {
+            $controller = "App\Http\Controllers\\$controller";
 
-            $file = __DIR__ . '/../controllers/' . $controller . '.php';
-
-            if (file_exists($file) && is_readable($file))
-            {
-
-                require_once $file;
-
-                if (class_exists($controller))
-                {
-
-                    return new $controller($this);
-                }
-
-                return false;
-            }
-
-            return false;
+            return new $controller($this);
         }
 
         return false;

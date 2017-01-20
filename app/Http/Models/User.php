@@ -1,5 +1,5 @@
 <?php
-namespace Model\User;
+namespace App\Http\Models;
 
 class User
 {

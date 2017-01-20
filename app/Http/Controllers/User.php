@@ -1,5 +1,8 @@
 <?php
-use Model\User as UM;
+namespace App\Http\Controllers;
+
+use App\Http\Models\User as Count;
+use App\Providers\View;
 
 class User extends Controller
 {
@@ -10,7 +13,7 @@ class User extends Controller
 
     public function name($name)
     {
-        $sum = new UM\User();
+        $sum = new Count();
         $sum = $sum->get();
 
         return View::make('index', $sum);

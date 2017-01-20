@@ -1,4 +1,5 @@
 <?php
+namespace App\Providers;
 
 class Response
 {
@@ -31,7 +32,7 @@ class Response
 
         if (!empty($path))
         {
-            require __DIR__ . '/../views/' . $path . '.php';
+            require __DIR__ . '/../../resources/views/' . $path . '.php';
         }
     }
 }
