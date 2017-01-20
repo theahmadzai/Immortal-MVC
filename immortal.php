@@ -1,14 +1,26 @@
 <?php
-$uri = urldecode(
-    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
-);
+define('APP_TIME', microtime(true));
+define('APP_ROOT', __DIR__);
+define('DEV_ENV', true);
 
-// This file allows us to emulate Apache's "mod_rewrite" functionality from the
-// built-in PHP web server. This provides a convenient way to test a Laravel
-// application without having installed a "real" web server software here.
-if ($uri !== '/' && file_exists(__DIR__ . '/public' . $uri))
+date_default_timezone_set('UTC');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if (version_compare(PHP_VERSION, '5.4', '<') === true)
 {
-    return false;
+    die('Please update your PHP version, Requires PHP v5.4 or Above! \n');
 }
 
-require_once __DIR__ . '/public/index.php';
+register_shutdown_function(function ($startTime)
+{
+    echo '<script>console.log("Time: ', number_format((microtime(true) - APP_TIME), 4), ' Seconds");</script>';
+}, APP_TIME);
+
+function pr($arr)
+{
+    echo '<pre>', print_r($arr, true), '</pre>';
+}
+
+require '/vendor/autoload.php';
+require '/routes/web.php';

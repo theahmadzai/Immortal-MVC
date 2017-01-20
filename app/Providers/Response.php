@@ -26,7 +26,7 @@ class Response
         }
     }
 
-    public static function render($path, $data)
+    public static function render($path, $data = [])
     {
         self::sendHeaders();
 

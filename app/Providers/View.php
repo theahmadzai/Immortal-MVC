@@ -5,6 +5,6 @@ class View
 {
     public static function make($path, $data = [])
     {
-        return [$path, $data, 'view' => true];
+        return ['path' => $path, 'data' => $data];
     }
 }

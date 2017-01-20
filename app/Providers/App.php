@@ -17,71 +17,47 @@ class App
             {
                 extract($params);
 
-                if ($controller !== false)
+                $controller = $this->runController($controller);
+
+                if ($controller !== false || is_callable($method))
                 {
-                    $controller = $this->runController($controller);
+                    $method = $this->runMethod($controller, $method, $params);
 
-                    if ($controller !== false)
+                    if ($method !== false)
                     {
-                        $method = $this->runMethod($controller, $method, $params);
-
-                        if ($method !== false)
-                        {
-                            if (is_array($method))
-                            {
-                                Response::render($method[0], $method[1]);
-                            }
-                        }
-                        else
-                        {
-                            throw new HttpException($method . ' ==> Method not found.');
-                        }
+                        Response::render($method['path'], $method['data']);
                     }
                     else
                     {
-                        throw new HttpException($controller . ' ==> Controller not found.');
+                        throw new HttpException(['error' => 404, 'method' => $method]);
                     }
                 }
                 else
                 {
-                    $method = call_user_func_array($method, $params);
-
-                    if (is_array($method))
-                    {
-                        if (!empty($method) && array_key_exists('view', $method) && $method['view'] === true)
-                        {
-                            Response::render($method[0], $method[1]);
-                        }
-                        else
-                        {
-                            echo '<pre>', print_r($method, true), '</pre>';
-                        }
-                    }
-                    else
-                    {
-                        echo $method;
-                    }
-                    exit;
+                    throw new HttpException(['error' => 404, 'controller' => $controller]);
                 }
             }
             else
             {
-                throw new HttpException(Request::get('url') . ' ==> URL not found.');
+                throw new HttpException(['error' => 404, 'url' => Request::get('url')]);
             }
         }
         catch (HttpException $e)
         {
-            echo ($e);
-        }
+        };
     }
 
     private function runController($controller)
     {
-        if (!class_exists($controller))
+        if (!class_exists($controller) && $controller !== false)
         {
             $controller = "App\Http\Controllers\\$controller";
+            if (class_exists($controller))
+            {
+                return new $controller($this);
+            }
 
-            return new $controller($this);
+            return false;
         }
 
         return false;
@@ -89,7 +65,11 @@ class App
 
     private function runMethod($controller, $method, $params)
     {
-        if (method_exists($controller, $method))
+        if (is_callable($method))
+        {
+            return call_user_func_array($method, $params);
+        }
+        else if (method_exists($controller, $method))
         {
             return call_user_func_array([$controller, $method], $params);
         }
