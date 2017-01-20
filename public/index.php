@@ -35,11 +35,11 @@ else
     ini_set('display_errors', 0);
 }
 
-require '/../app/Autoloader.php';
+require '/../vendor/autoload.php';
 
 Autoloader::map([
     'files'   => ['config', 'http'],
-    'classes' => ['core', 'helpers', 'exceptions', 'models'],
+    'classes' => ['helpers', 'core', 'exceptions', 'models'],
 ]);
 
 $App = new App();

@@ -26,16 +26,11 @@ class Autoloader
     {
         foreach (self::$files as $dir)
         {
-            $files = array_slice(scandir(APP . $dir), 2);
+            $files = glob(APP . $dir . '/*.php');
 
             foreach ($files as $file)
             {
-                $file = realpath(APP . $dir . DIRECTORY_SEPARATOR . $file);
-
-                if (file_exists($file) && is_readable($file))
-                {
-                    require_once $file;
-                }
+                self::loadFile($file);
             }
         }
     }
@@ -46,13 +41,18 @@ class Autoloader
         {
             foreach (self::$classes as $dir)
             {
-                $file = realpath(APP . $dir . DIRECTORY_SEPARATOR . $class . '.php');
-
-                if (file_exists($file) && is_readable($file))
-                {
-                    require_once $file;
-                }
+                self::loadFile(APP . $dir . '/' . $class . '.php');
             }
         });
+    }
+
+    private static function loadFile($path)
+    {
+        $file = realpath($path);
+
+        if (file_exists($file) && is_readable($file))
+        {
+            require_once $file;
+        }
     }
 }
