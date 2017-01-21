@@ -2,7 +2,6 @@
 namespace App\Exceptions;
 
 use App\Providers\Request;
-use App\Providers\Response;
 use App\Providers\View;
 
 class HttpException extends \Exception
@@ -17,8 +16,8 @@ class HttpException extends \Exception
                 View::make('errors/403', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
             case 404:
-                $content = View::make('errors/404', ['error' => 'Invalid url: ' . Request::get('url')]);
-                Response::addHeader('HTTP/1.1 404 Not Found');
+                echo View::make('errors/404.twig', ['error' => Request::get('url')]);
+                //Response::addHeader('HTTP/1.1 404 Not Found');
                 break;
             case 500:
                 View::make('errors/500', ['error' => 'Invalid url: ' . Request::get('url')]);
@@ -30,6 +29,6 @@ class HttpException extends \Exception
                 View::make('errors/404', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
         }
-        Response::render($content);
+        //Response::render($content);
     }
 }

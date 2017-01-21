@@ -17,7 +17,7 @@ class View
                 return $twig->render($file);
             }
 
-            echo $twig->render($file, $data);
+            return $twig->render($file, $data);
         }
         catch (Twig_Error_Loader $e)
         {

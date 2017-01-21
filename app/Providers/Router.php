@@ -75,17 +75,26 @@ class Router
 
     private function resolve($url)
     {
-        $url = filter_var(trim($url, '/'), FILTER_SANITIZE_URL);
+        $url = filter_var(trim(strtolower($url), '/'), FILTER_SANITIZE_URL);
 
         foreach ($this->routes as $pattern => $params)
         {
             if (preg_match('~^' . $pattern . '$~', $url, $matches))
             {
+                pr($matches);
                 foreach ($matches as $key => $value)
                 {
                     if (array_key_exists($key, $params['params']))
                     {
                         $params['params'][$key] = $value;
+                    }
+                }
+
+                foreach ($params['params'] as $key => $value)
+                {
+                    if ($value === true)
+                    {
+                        unset($params['params'][$key]);
                     }
                 }
 

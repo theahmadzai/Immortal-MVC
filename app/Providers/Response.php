@@ -35,8 +35,7 @@ class Response
 
     public static function render($data)
     {
-        self::sendHeaders();
-
+        //self::sendHeaders();
         echo $data;
     }
 }

@@ -5,8 +5,8 @@ use App\Providers\View;
 
 class Comments extends Controller
 {
-    public function index($name, $fname)
+    public function index($id = 10, $name = 'Comments')
     {
-        return View::make('index', compact('name', 'fname'));
+        return View::make('index.twig', ['id' => $id, 'name' => $name]);
     }
 }
