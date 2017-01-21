@@ -81,7 +81,6 @@ class Router
         {
             if (preg_match('~^' . $pattern . '$~', $url, $matches))
             {
-                pr($matches);
                 foreach ($matches as $key => $value)
                 {
                     if (array_key_exists($key, $params['params']))
