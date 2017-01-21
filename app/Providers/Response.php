@@ -19,11 +19,11 @@ class Response
     {
         if (!headers_sent())
         {
-            if (isset(self::$headers))
+            if (!empty(self::$headers))
             {
                 foreach (self::$headers as $header)
                 {
-                    header($header, true);
+                    header($header);
                 }
             }
             else
@@ -33,7 +33,7 @@ class Response
         }
     }
 
-    public static function render($data = [])
+    public static function render($data)
     {
         self::sendHeaders();
 

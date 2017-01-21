@@ -18,6 +18,7 @@ class HttpException extends \Exception
                 break;
             case 404:
                 $content = View::make('errors/404', ['error' => 'Invalid url: ' . Request::get('url')]);
+                Response::addHeader('HTTP/1.1 404 Not Found');
                 break;
             case 500:
                 View::make('errors/500', ['error' => 'Invalid url: ' . Request::get('url')]);
@@ -29,7 +30,6 @@ class HttpException extends \Exception
                 View::make('errors/404', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
         }
-        Response::addHeader('HTTP/1.1 404 Not Found');
         Response::render($content);
     }
 }

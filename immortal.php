@@ -3,6 +3,8 @@ define('APP_TIME', microtime(true));
 define('APP_ROOT', __DIR__);
 define('DEV_ENV', true);
 
+define('ASSET_ROOT', 'http://' . $_SERVER['HTTP_HOST'] . str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', APP_ROOT) . '/public'));
+
 date_default_timezone_set('UTC');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

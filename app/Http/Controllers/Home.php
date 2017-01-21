@@ -7,6 +7,6 @@ class Home extends Controller
 {
     public function index()
     {
-        return View::make('index');
+        View::make('index.twig', ['name' => 'Javed']);
     }
 }
