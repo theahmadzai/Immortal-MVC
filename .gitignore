@@ -3,13 +3,13 @@
 Thumbs.db
 desktop.ini
 
-#Project
-app/views
+#Framework
+cache/
 
 #Sass
 .sass-cache/
 *.css.map
 
 #Composer
-vendor
+vendor/
 composer.lock
