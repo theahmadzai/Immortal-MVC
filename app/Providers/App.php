@@ -25,7 +25,7 @@ class App
 
                     if ($method !== false)
                     {
-                        Response::render($method['path'], $method['data']);
+                        Response::render($method);
                     }
                     else
                     {

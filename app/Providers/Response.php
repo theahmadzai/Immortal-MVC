@@ -5,12 +5,12 @@ class Response
 {
     private static $headers = [];
 
-    public function addHeader($header)
+    public static function addHeader($header)
     {
         self::$headers[] = $header;
     }
 
-    public function addHeaders(array $headers = [])
+    public static function addHeaders(array $headers = [])
     {
         self::$headers = array_merge(self::$headers, $headers);
     }
@@ -19,20 +19,24 @@ class Response
     {
         if (!headers_sent())
         {
-            foreach (self::$headers as $header)
+            if (isset(self::$headers))
             {
-                header($header, true);
+                foreach (self::$headers as $header)
+                {
+                    header($header, true);
+                }
+            }
+            else
+            {
+                header('HTTP/1.0 200 OK');
             }
         }
     }
 
-    public static function render($path, $data = [])
+    public static function render($data = [])
     {
         self::sendHeaders();
 
-        if (!empty($path))
-        {
-            require __DIR__ . '/../../resources/views/' . $path . '.php';
-        }
+        echo $data;
     }
 }

@@ -3,28 +3,33 @@ namespace App\Exceptions;
 
 use App\Providers\Request;
 use App\Providers\Response;
+use App\Providers\View;
 
 class HttpException extends \Exception
 {
     public function __construct(array $e)
     {
+        $content = [];
+
         switch ($e['error'])
         {
             case 403:
-                Response::render('errors/403');
+                View::make('errors/403', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
             case 404:
-                Response::render('errors/404', ['error' => 'Invalid url: ' . Request::get('url')]);
+                $content = View::make('errors/404', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
             case 500:
-                Response::render('errors/500');
+                View::make('errors/500', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
             case 503:
-                Response::render('errors/503');
+                View::make('errors/503', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
             default:
-                Response::rednder('errors/404');
+                View::make('errors/404', ['error' => 'Invalid url: ' . Request::get('url')]);
                 break;
         }
+        Response::addHeader('HTTP/1.1 404 Not Found');
+        Response::render($content);
     }
 }
