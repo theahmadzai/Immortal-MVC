@@ -8,7 +8,7 @@ class User extends Controller
 {
     public function index()
     {
-        return View::make('index', 'welcome');
+        return View::make('index.twig', ['welcome']);
     }
 
     public function name($name)
@@ -16,6 +16,6 @@ class User extends Controller
         $sum = new Count();
         $sum = $sum->get();
 
-        return View::make('index', $sum);
+        return View::make('index.twig', [$sum]);
     }
 }

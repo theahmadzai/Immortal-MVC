@@ -24,5 +24,5 @@ function pr($arr)
     echo '<pre>', print_r($arr, true), '</pre>';
 }
 
-require '/vendor/autoload.php';
-require '/routes/web.php';
+require 'vendor/autoload.php';
+require 'routes/web.php';
